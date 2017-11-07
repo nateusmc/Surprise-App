@@ -1,15 +1,29 @@
 import React from 'react';
 
-import SurpriseButton from './surprise-button';
-import SurpriseImage from './surprise-image';
+import SurpriseButton from './SurpriseButton';
+import SurpriseImage from './SurpriseImage';
 
 export default class Surprise extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+  constructor(props) {
+      super(props);
+      
+      this.state = {
+          display: 'button'
+      }
+  }
 
-    render() {
-        // Show the button to start with
-        return <SurpriseButton />;
-    }
+  showImage() {
+      this.setState({
+          display: 'image'
+      });
+  }
+
+  render() {
+      if (this.state.display === 'button') {
+          return <SurpriseButton onClick={e => this.showImage()} />;
+      }
+      else if (this.state.display === 'image') {
+          return <SurpriseImage />;
+      }
+  }
 }
